@@ -1,49 +1,39 @@
 const db = require("../models");
 
-// Defining methods for the usersController
+// Defining methods for the singersController
 module.exports = {
     findAll: function(req, res) {
-        db.User
+        db.Singer
             .find(req.query)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
-        db.User
-            .findById(req.params.id)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
-    findByInfo: function(req, res) {
-        db.User
+        db.Singer
             .findById(req.params.id)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
-        db.User
+        db.Singer
             .create(req.body)
-            .then(dbModel => {
-                req.session.userId = dbModel._id;
-                // res.json(dbModel);
-                console.log(req.session);      
-            })
+            .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     update: function(req, res) {
-        db.User
+        db.Singer
             .findOneAndUpdate({ _id: req.params.id }, req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     remove: function(req, res) {
-        db.User
+        db.Singer
             .findById({ _id: req.params.id })
             .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
-    checkUserName: function function_name(req, res) {
-        db.User.find();
+    checkSingerName: function function_name(req, res) {
+        db.Singer.find();
     }
 };

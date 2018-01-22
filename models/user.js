@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-	name: {type: String, required: true},
-	location: {type: String, required: true},
-	songName: {type: String, required: true},
-	songArtist: {type: String, required: true},
-	completed: {type: Boolean, default: false}
+	username: {type: String, required: true, unique: true},
+	firstName: {type: String, required: true},
+	lastName: {type: String, required: true},
+	nickname: {type: String},
+	password: {type: String, required: true}
 });
 
 const User = mongoose.model("User", userSchema);

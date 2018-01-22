@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+import { List, ListItem } from "../../components/List";
 
 class Singers extends Component {
 	state = {
-		name: "name",
-		songName: "",
-		songArtist: ""
+		singers: []
 	};
 
 	componentDidMount() {
@@ -13,10 +12,9 @@ class Singers extends Component {
 	}
 
 	loadSingers = () => {
-		API.getUsers()
+		API.getSingers()
 			.then(res => {
-				console.log(res.data);
-				this.setState({ /*name: res.data.name, songName: "", songArtist: "" */})
+				this.setState({ singers: res.data})
 				})
 			.catch(err => console.log(err))
 	};
@@ -25,7 +23,15 @@ class Singers extends Component {
 		return (
 			<div>
 				<h1>Singers</h1>
-				{this.state.name}
+				<div>
+					<List>
+						{this.state.singers.map(singer => (
+							<ListItem key={singer._id}>
+								{singer.name} singing	{singer.song} by {singer.artist}
+							</ListItem>
+						))}
+					</List>
+				</div>
 			</div>
 		);
 	}
