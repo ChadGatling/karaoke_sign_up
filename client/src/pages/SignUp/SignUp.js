@@ -17,6 +17,8 @@ class SignUp extends Component {
 		submitted: false
 	};
 
+
+
 	handleInputChange = event => {
 		const { name, value } = event.target;
 		this.setState({
@@ -46,7 +48,10 @@ class SignUp extends Component {
 							nickname: this.state.nickname,
 							password: this.state.password
 						})
-						.then(this.setState({submitted: true}))
+						.then(response => {
+							this.setState({userId: response})
+						})
+						// .then(this.setState({submitted: true}))
 						.catch(err => console.log(err));
 					}
 				})
@@ -65,6 +70,10 @@ class SignUp extends Component {
 			username: this.state.username,
 			password: this.state.password
 		})
+	}
+
+	componentDidMount() {
+		
 	}
  
 	render() {

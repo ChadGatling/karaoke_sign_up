@@ -9,8 +9,8 @@ export default {
         return axios.get("/api/singers");
     },
     // Gets the user with the given id
-    getUser: function(username) {
-        return axios.get("/api/users/", username);
+    getUser: function(id) {
+        return axios.get("/api/users/", id);
     },
     logIn: function(userData) {
         return axios.post("/api/users/logIn", userData);
@@ -26,5 +26,8 @@ export default {
     // Saves a singer to the database
     saveSinger: function(singerData) {
         return axios.post("/api/singers", singerData);
+    },
+    session: function() {
+        return axios.get("/api/session")
     }
 };

@@ -10,7 +10,7 @@ module.exports = {
     },
     findById: function(req, res) {
         db.User
-            .findById(req.params.id)
+            .findById(req.session._id)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
@@ -24,9 +24,9 @@ module.exports = {
         db.User
             .create(req.body)
             .then(dbModel => {
-                req.session.userId = dbModel._id;
-                // res.json(dbModel);
-                console.log(req.session);      
+                req.session._id = dbModel._id;
+                res.json("done");
+                console.log("usersController.js", req.session);      
             })
             .catch(err => res.status(422).json(err));
     },
@@ -43,7 +43,15 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
-    checkUserName: function function_name(req, res) {
-        db.User.find();
+    session: function(req, res) {
+        console.log(req.session);
+        if (req.session) {
+            db.User
+                .findById(req.session._id)
+                .then(dbModel => res.json(dbModel))
+                .catch(err => res.status(422).json(err));
+        } else {
+            res.json("No req.session._id");
+        }
     }
 };

@@ -13,9 +13,9 @@ router
     .put(usersController.update)
     .delete(usersController.remove);
 
-// Matches with "/api/users/logIn"
-// router
-// 	.route("/logIn")
-// 	.get(usersController.logIn);
+// Matches with "/api/users/session"
+router
+	.route("/session")
+	.get(usersController.session);
 
 module.exports = router;

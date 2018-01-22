@@ -13,6 +13,14 @@ class RequestSong extends Component {
 		submitted: false
 	};
 
+	componentDidMount() {
+		console.log("RequestSong did mount");
+		API.session()
+			.then(res => {
+				console.log(res.data);
+			});
+	};
+
 	handleInputChange = event => {
 		const { name, value } = event.target;
 		this.setState({
