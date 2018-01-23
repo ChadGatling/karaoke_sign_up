@@ -17,7 +17,6 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				Username: {this.state.username}
 				<Router>
 					<div>
 						<Nav />

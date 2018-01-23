@@ -16,9 +16,14 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     findByInfo: function(req, res) {
+        console.log("finding", req.params.id);
         db.User
-            .findById(req.params.id)
-            .then(dbModel => res.json(dbModel))
+            .findOne({username: req.params.id})
+            .then(dbModel => {
+                req.session._id = dbModel._id;
+                res.json(dbModel);
+                console.log(req.session);
+            })
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
