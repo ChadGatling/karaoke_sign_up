@@ -10,7 +10,8 @@ export default {
     },
     // Gets the user with the given id
     getUser: function(id) {
-        return axios.get("/api/users/", id);
+        console.log("finding", id);
+        return axios.get("/api/users/" + id);
     },
     logIn: function(userData) {
         return axios.post("/api/users/logIn", userData);

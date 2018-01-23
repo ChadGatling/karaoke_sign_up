@@ -62,18 +62,15 @@ class SignUp extends Component {
 			alert("Password retype must match password.");
 		}
 	};
-
-	handleLogIn = event => {
+ 
+	handleLogIn = (event) => {
 		event.preventDefault();
 
-		API.logIn({
-			username: this.state.username,
-			password: this.state.password
-		})
+		API.getUser(this.state.username)
 	}
 
 	componentDidMount() {
-		
+
 	}
  
 	render() {

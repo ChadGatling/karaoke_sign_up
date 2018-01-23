@@ -17,7 +17,9 @@ class RequestSong extends Component {
 		console.log("RequestSong did mount");
 		API.session()
 			.then(res => {
-				console.log(res.data);
+				this.setState({
+					username: res.data.username
+				});
 			});
 	};
 
@@ -44,6 +46,7 @@ class RequestSong extends Component {
 		return(
 		<div>
 			<h1>Request Song</h1>
+			{this.state.username}
 			<form>
 			{/*Song*/}
 				<Input

@@ -3,14 +3,15 @@ const db = require("../models");
 // Defining methods for the usersController
 module.exports = {
     findAll: function(req, res) {
+        console.log("Finding", req.body);
         db.User
-            .find(req.query)
+            .find(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
         db.User
-            .findById(req.session._id)
+            .findById(req.params.id)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
@@ -21,12 +22,12 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
+        console.log("Creating", req.body);
         db.User
             .create(req.body)
             .then(dbModel => {
                 req.session._id = dbModel._id;
-                res.json("done");
-                console.log("usersController.js", req.session);      
+                res.json("done");     
             })
             .catch(err => res.status(422).json(err));
     },
