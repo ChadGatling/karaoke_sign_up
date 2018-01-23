@@ -14,12 +14,13 @@ class RequestSong extends Component {
 	};
 
 	componentDidMount() {
-		console.log("RequestSong did mount");
 		API.session()
 			.then(res => {
-				this.setState({
-					username: res.data.username
-				});
+				if (res.data.username) {
+					this.setState({
+						username: res.data.username
+					});
+				}
 			});
 	};
 
@@ -34,11 +35,13 @@ class RequestSong extends Component {
 		event.preventDefault();
 
 		API.saveSinger({
+			name: this.state.username,
 			song: this.state.song,
 			artist: this.state.artist,
+			location: "Ego's",
 			comment: this.state.comment,
 		})
-		.then(this.setstate({submitted: true}))
+		// .then(this.setstate({submitted: true}))
 		.catch(err => console.log(err));
 	};
 
@@ -51,19 +54,19 @@ class RequestSong extends Component {
 			{/*Song*/}
 				<Input
 				placeholder="Song"
-				onClick={this.handleInputChange}
+				onChange={this.handleInputChange}
 				name="song"
 				/>
 			{/*Artist*/}
 				<Input
 				placeholder="Artist"
-				onClick={this.handleInputChange}
+				onChange={this.handleInputChange}
 				name="artist"
 				/>
 			{/*comment*/}
 				<Input
 				placeholder="Comment/Clarification (optional)"
-				onClick={this.handleInputChange}
+				onChange={this.handleInputChange}
 				name="comment"
 				/>
 			{/*location*/}

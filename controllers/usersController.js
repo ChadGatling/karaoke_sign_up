@@ -21,7 +21,7 @@ module.exports = {
             .findOne({username: req.params.id})
             .then(dbModel => {
                 req.session._id = dbModel._id;
-                res.json(dbModel);
+                res.json(dbModel); // disable for production
                 console.log(req.session);
             })
             .catch(err => res.status(422).json(err));
@@ -54,7 +54,7 @@ module.exports = {
         if (req.session) {
             db.User
                 .findById(req.session._id)
-                .then(dbModel => res.json(dbModel))
+                .then(dbModel => res.json(dbModel)) // diable json for production
                 .catch(err => res.status(422).json(err));
         } else {
             res.json("No req.session._id");

@@ -31,7 +31,7 @@ class SignUp extends Component {
 
 		if (this.state.password === this.state.passwordMatch) {
 			if (this.state.username && this.state.firstName && this.state.lastName && this.state.password && this.state.passwordMatch) {
-				API.getUsers().then(res => {
+				API.getUsers().then(res => { // change to getUser and pass if null
 					var usernameList = [];
 
 					res.data.forEach((user) => {
@@ -51,7 +51,7 @@ class SignUp extends Component {
 						.then(response => {
 							this.setState({userId: response})
 						})
-						// .then(this.setState({submitted: true}))
+						.then(this.setState({submitted: true}))
 						.catch(err => console.log(err));
 					}
 				})
