@@ -59,5 +59,13 @@ module.exports = {
         } else {
             res.json("No req.session._id");
         }
+    },
+    logOut: function(req, res) {
+        console.log(req.session);
+        if (req.session) {
+            req.session.destroy();
+        } else {
+            res.json("No req.session._id");
+        }
     }
 };

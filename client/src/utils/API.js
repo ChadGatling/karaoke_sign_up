@@ -30,5 +30,8 @@ export default {
     },
     session: function() {
         return axios.get("/api/session")
+    },
+    logOut: function() {
+        return axios.get("/api/logOut")
     }
 };

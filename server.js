@@ -17,7 +17,7 @@ app.use(session({
 	secret: 'whatsupchickenbutt',
 	resave: false,
 	saveUninitialized: false, 
-	cookie: { maxAge: 60000 }
+	cookie: { maxAge: 1000 * 60 *10 }
 }));
 // Add routes, both API and view
 app.use(routes);

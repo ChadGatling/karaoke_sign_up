@@ -19,10 +19,17 @@ class Singers extends Component {
 			.catch(err => console.log(err))
 	};
 
+	handleLogOut = event => {
+		event.preventDefault();
+
+		API.logOut();
+	};
+
 	render() {
 		return (
 			<div>
 				<h1>Singers</h1>
+				<button onClick={this.handleLogOut}>Log Out</button>
 				<div>
 					<List>
 						{this.state.singers.map(singer => (
