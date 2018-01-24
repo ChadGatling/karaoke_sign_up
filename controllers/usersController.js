@@ -20,11 +20,16 @@ module.exports = {
         db.User
             .findOne({username: req.params.id})
             .then(dbModel => {
-                req.session._id = dbModel._id;
+                if (dbModel) {
+                req.session._id = dbModel._id
+                }
+                
                 res.json(dbModel); // disable for production
-                console.log(req.session);
             })
-            .catch(err => res.status(422).json(err));
+            .catch(err => {
+                console.log("HERE IS YOUR ERROR", err);
+                res.status(422).json(err)
+            });
     },
     create: function(req, res) {
         console.log("Creating", req.body);

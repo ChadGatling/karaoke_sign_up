@@ -31,16 +31,12 @@ class SignUp extends Component {
 
 		if (this.state.password === this.state.passwordMatch) {
 			if (this.state.username && this.state.firstName && this.state.lastName && this.state.password && this.state.passwordMatch) {
-				API.getUsers().then(res => { // change to getUser and pass if null
-					var usernameList = [];
+				API.getUser(this.state.username).then(res => { // change to getUser and pass if null					
 
-					res.data.forEach((user) => {
-						usernameList.push(user.username);
-					});
-
-					if (usernameList.includes(this.state.username)) {
+					if (res.data) {
 						alert("Sorry that username is already taken.");
 					}else {
+						console.log("Creating", this.state.username);
 						API.saveUser({
 							username: this.state.username,
 							firstName: this.state.firstName,
@@ -51,7 +47,7 @@ class SignUp extends Component {
 						.then(response => {
 							this.setState({userId: response})
 						})
-						.then(this.setState({submitted: true}))
+						// .then(this.setState({submitted: true}))
 						.catch(err => console.log(err));
 					}
 				})
