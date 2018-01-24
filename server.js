@@ -16,7 +16,7 @@ app.use(express.static("client/build"));
 app.use(session({ 
 	secret: 'whatsupchickenbutt',
 	resave: false,
-	saveUninitialized: false, 
+	saveUninitialized: true, 
 	cookie: { maxAge: 1000 * 60 *10 }
 }));
 // Add routes, both API and view

@@ -16,7 +16,7 @@ class RequestSong extends Component {
 	componentDidMount() {
 		API.session()
 			.then(res => {
-				console.log("res.data", res.data);
+				console.log("res.data", res);
 				if (res.data) {
 					this.setState({
 						username: res.data.username

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Input, FormBtn/*, Select*/} from "../../components/Form";
 import API from "../../utils/API";
-import { Redirect } from "react-router";
+// import { Redirect } from "react-router";
 
 
 const colorRed = {color: "red"};
@@ -47,7 +47,7 @@ class SignUp extends Component {
 						.then(response => {
 							this.setState({userId: response})
 						})
-						// .then(this.setState({submitted: true}))
+						.then(this.props.history.push("/requestSong"))
 						.catch(err => console.log(err));
 					}
 				})
@@ -143,7 +143,6 @@ class SignUp extends Component {
 					<FormBtn onClick={this.handleLogIn}>
 						Sign In
 					</FormBtn>
-					{this.state.submitted && <Redirect to="/requestSong" />}
 				</form>
 			</div>
 		);

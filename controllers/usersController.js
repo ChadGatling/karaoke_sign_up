@@ -32,8 +32,10 @@ module.exports = {
         db.User
             .create(req.body)
             .then(dbModel => {
-                req.session._id = dbModel._id;
-                res.json("done");     
+                req.session.userId = dbModel._id;
+                req.session.save(() => {
+                    res.json("done");
+                });
             })
             .catch(err => res.status(422).json(err));
     },
@@ -52,9 +54,10 @@ module.exports = {
     },
     session: function(req, res) {
         console.log("Session api hit", req.session);
-        if (req.session) {
+        if (req.session && req.session.userId) {
+            console.log('USER ID:', req.session.userId)
             db.User
-                .findById(req.session._id)
+                .findById(req.session.userId)
                 .then(dbModel => res.json(dbModel)) // diable json for production
                 .catch(err => res.status(422).json(err));
         } else {
@@ -65,6 +68,7 @@ module.exports = {
         if (req.session) {
             req.session.destroy();
             console.log("Logout api hit after destroy", req.session);
+            res.send("done");
         } else {
             res.json("No req.session._id");
         }

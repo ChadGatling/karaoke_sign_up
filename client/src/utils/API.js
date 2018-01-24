@@ -13,9 +13,6 @@ export default {
         console.log("finding", id);
         return axios.get("/api/users/" + id);
     },
-    logIn: function(userData) {
-        return axios.post("/api/users/logIn", userData);
-    },
     // Deletes the user with the given id
     deleteUser: function(id) {
         return axios.delete("/api/users/" + id);
