@@ -62,7 +62,7 @@ class SignUp extends Component {
 	handleLogIn = (event) => {
 		event.preventDefault();
 
-		API.getUser(this.state.username)
+		API.logIn(this.state.username)
 	}
 
 	componentDidMount() {

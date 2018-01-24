@@ -18,12 +18,8 @@ module.exports = {
     findByInfo: function(req, res) {
         console.log("finding", req.params.id);
         db.User
-            .findOne({username: req.params.id})
+            .findOne({username: req.params.id}, "-password")
             .then(dbModel => {
-                if (dbModel) {
-                req.session._id = dbModel._id
-                }
-                
                 res.json(dbModel); // disable for production
             })
             .catch(err => {
@@ -55,7 +51,7 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     session: function(req, res) {
-        console.log(req.session);
+        console.log("Session api hit", req.session);
         if (req.session) {
             db.User
                 .findById(req.session._id)
@@ -66,11 +62,26 @@ module.exports = {
         }
     },
     logOut: function(req, res) {
-        console.log(req.session);
         if (req.session) {
             req.session.destroy();
+            console.log("Logout api hit after destroy", req.session);
         } else {
             res.json("No req.session._id");
         }
+    },
+    logIn: function(req, res) {
+        console.log("loging in", req.params.id);
+        db.User
+            .findOne({username: req.params.id})
+            .then(dbModel => {
+                if (dbModel) {
+                    req.session._id = dbModel._id
+                }
+                res.json(dbModel); // disable for production
+            })
+            .catch(err => {
+                console.log("HERE IS YOUR ERROR", err);
+                res.status(422).json(err)
+            });
     }
 };
