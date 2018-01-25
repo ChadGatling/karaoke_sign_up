@@ -32,6 +32,6 @@ export default {
         return axios.get("/api/logOut")
     },
     logIn: function(userData) {
-        return axios.get("/api/logIn/" + userData)
+        return axios.post("/api/logIn", userData)
     }
 };

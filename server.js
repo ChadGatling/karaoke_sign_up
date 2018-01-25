@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 // const mongojs = require("mongojs");
 const routes = require("./routes");
+const validator = require("express-validator");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -19,6 +20,8 @@ app.use(session({
 	saveUninitialized: true, 
 	cookie: { maxAge: 1000 * 60 *10 }
 }));
+// Validator
+app.use(validator());
 // Add routes, both API and view
 app.use(routes);
 

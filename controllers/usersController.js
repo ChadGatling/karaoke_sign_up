@@ -20,6 +20,7 @@ module.exports = {
         db.User
             .findOne({username: req.params.id}, "-password")
             .then(dbModel => {
+                console.log("find by info", dbModel);
                 res.json(dbModel); // disable for production
             })
             .catch(err => {
@@ -28,14 +29,25 @@ module.exports = {
             });
     },
     create: function(req, res) {
-        console.log("Creating", req.body);
+
+        // Validator
+        req.checkBody(
+            "username",
+            "Username is not valid."
+            ).isAlphanumeric();
+
+        var errors = req.validationErrors();
+        if (errors) {
+            res.send(errors);
+            return;
+        } else 
+        
+        // DB insert user
         db.User
             .create(req.body)
             .then(dbModel => {
                 req.session.userId = dbModel._id;
-                req.session.save(() => {
-                    res.json("done");
-                });
+                res.json("done");
             })
             .catch(err => res.status(422).json(err));
     },
@@ -54,8 +66,7 @@ module.exports = {
     },
     session: function(req, res) {
         console.log("Session api hit", req.session);
-        if (req.session && req.session.userId) {
-            console.log('USER ID:', req.session.userId)
+        if (req.session) {
             db.User
                 .findById(req.session.userId)
                 .then(dbModel => res.json(dbModel)) // diable json for production
@@ -74,17 +85,18 @@ module.exports = {
         }
     },
     logIn: function(req, res) {
-        console.log("loging in", req.params.id);
+        console.log("logging in", req.body);
         db.User
-            .findOne({username: req.params.id})
+            .findOne(req.body)
             .then(dbModel => {
                 if (dbModel) {
-                    req.session._id = dbModel._id
+                    req.session.userId = dbModel._id
+                    console.log("req.session =", req.session);
                 }
                 res.json(dbModel); // disable for production
             })
             .catch(err => {
-                console.log("HERE IS YOUR ERROR", err);
+                // console.log("HERE IS YOUR ERROR", err);
                 res.status(422).json(err)
             });
     }

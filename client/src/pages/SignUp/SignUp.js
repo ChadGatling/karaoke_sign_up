@@ -29,10 +29,13 @@ class SignUp extends Component {
 	handleSignUp = event => {
 		event.preventDefault();
 
-		if (this.state.password === this.state.passwordMatch) {
+		if (this.state.password === this.state.passwordMatch) { // If the passwords match
 			if (this.state.username && this.state.firstName && this.state.lastName && this.state.password && this.state.passwordMatch) {
-				API.getUser(this.state.username).then(res => { // change to getUser and pass if null					
+				
+				// Get the user with a username that matches the one tried.
+				API.getUser(this.state.username).then(res => {					
 
+					// If anything comes back from the call to get the username than the username is already taken
 					if (res.data) {
 						alert("Sorry that username is already taken.");
 					}else {
@@ -61,8 +64,11 @@ class SignUp extends Component {
  
 	handleLogIn = (event) => {
 		event.preventDefault();
+		if (this.state.username) {
+			API.getUser(this.state.username)
+		};
 
-		API.logIn(this.state.username)
+		API.logIn({username: this.state.username})
 	}
 
 	componentDidMount() {
