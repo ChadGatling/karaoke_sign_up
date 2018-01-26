@@ -71,6 +71,7 @@ class SignUp extends Component {
 				}).then(response => {
 					console.log("response", response);
 					if (response.data === "success") {
+						this.props.history.push("/requestSong")
 
 					}else if (response.data === "fail") {
 						alert("Username or password does not match.")

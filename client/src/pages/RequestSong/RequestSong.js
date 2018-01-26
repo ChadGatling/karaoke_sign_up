@@ -9,8 +9,7 @@ class RequestSong extends Component {
 		song: "",
 		artist: "",
 		comment: "",
-		location: "",
-		submitted: false
+		location: ""
 	};
 
 	componentDidMount() {
@@ -42,7 +41,7 @@ class RequestSong extends Component {
 			location: "Ego's",
 			comment: this.state.comment,
 		})
-		// .then(this.setstate({submitted: true}))
+		.then(this.props.history.push("/singers"))
 		.catch(err => console.log(err));
 	};
 

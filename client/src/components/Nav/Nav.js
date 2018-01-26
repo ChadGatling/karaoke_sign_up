@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
 
 class Nav extends Component {
 	state = {
 
 	};
+
+	handleLogout = event => {
+		event.preventDefault();
+
+		API.logOut().then(this.props.history.push("/requestSong"));
+	}
 
 	render() {
 		return(
@@ -30,6 +37,9 @@ class Nav extends Component {
 							</a>
 							<a href="/locations" className="navbar-brand">
 								Locations
+							</a>
+							<a className="navbar-brand" onClick={this.handleLogout}>
+								Log Out
 							</a>
 						</div>
 					</div>
