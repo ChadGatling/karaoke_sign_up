@@ -87,13 +87,16 @@ module.exports = {
     logIn: function(req, res) {
         console.log("logging in", req.body);
         db.User
-            .findOne(req.body)
-            .then(dbModel => {
+            .findOne(req.body).then(dbModel => {
+                console.log("dbModel =", dbModel);
                 if (dbModel) {
-                    req.session.userId = dbModel._id
-                    console.log("req.session =", req.session);
+                    if (req.body.password === dbModel.password) {
+                        req.session.userId = dbModel._id
+                        res.send("success");
+                    }                     
+                }else {
+                    res.send("fail")
                 }
-                res.json(dbModel); // disable for production
             })
             .catch(err => {
                 // console.log("HERE IS YOUR ERROR", err);

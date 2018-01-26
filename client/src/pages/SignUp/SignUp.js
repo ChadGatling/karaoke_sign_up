@@ -64,11 +64,24 @@ class SignUp extends Component {
  
 	handleLogIn = (event) => {
 		event.preventDefault();
-		if (this.state.username) {
-			API.getUser(this.state.username)
-		};
+		if (this.state.username && this.state.password) {
+				API.logIn({
+					username: this.state.username,
+					password: this.state.password
+				}).then(response => {
+					console.log("response", response);
+					if (response.data === "success") {
 
-		API.logIn({username: this.state.username})
+					}else if (response.data === "fail") {
+						alert("Username or password does not match.")
+					}else {
+						alert("oh boy something went wrong.")
+					}
+				}
+			)
+		}else {
+			alert("Both username and password required to sign in.")
+		}
 	}
 
 	componentDidMount() {
