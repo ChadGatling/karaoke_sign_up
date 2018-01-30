@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "bcrypt": "^1.0.3",
     "express-session": "^1.15.6",
     "express-validator": "^4.3.0",
     "mongojs": "^2.4.1",

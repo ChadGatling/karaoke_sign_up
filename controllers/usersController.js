@@ -1,4 +1,5 @@
 const db = require("../models");
+const bcrypt = require("bcrypt");
 
 // Defining methods for the usersController
 module.exports = {
@@ -41,15 +42,21 @@ module.exports = {
             res.send(errors);
             return;
         } else 
-        
-        // DB insert user
-        db.User
-            .create(req.body)
-            .then(dbModel => {
-                req.session.userId = dbModel._id;
-                res.json("done");
-            })
-            .catch(err => res.status(422).json(err));
+
+        // Hash password
+        bcrypt.hash(req.body.password, 10, function(err, hash) {
+            req.body.password = hash 
+
+            // DB insert user
+            db.User
+                .create(req.body)
+                .then(dbModel => {
+                    req.session.userId = dbModel._id;
+                    res.json("done");
+                })
+                .catch(err => res.status(422).json(err));
+        });
+
     },
     update: function(req, res) {
         db.User
@@ -85,15 +92,18 @@ module.exports = {
         }
     },
     logIn: function(req, res) {
-        console.log("logging in", req.body);
+        console.log("logging in", req.body.password);
         db.User
-            .findOne(req.body).then(dbModel => {
+            .findOne({username: req.body.username}).then(dbModel => {
                 console.log("dbModel =", dbModel);
                 if (dbModel) {
-                    if (req.body.password === dbModel.password) {
-                        req.session.userId = dbModel._id
-                        res.send("success");
-                    }                     
+
+                    bcrypt.compare(req.body.password, dbModel.password, function(err, hashRes) {
+                        if (hashRes) {
+                            req.session.userId = dbModel._id
+                            res.send("success");
+                        }
+                    });                    
                 }else {
                     res.send("fail")
                 }

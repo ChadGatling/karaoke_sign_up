@@ -48,7 +48,7 @@ class RequestSong extends Component {
 	render() {
 		return(
 		<div>
-			<h1>Request Song</h1>
+			<h1>Request Song -Hashed-</h1>
 			{this.state.username}
 			<form>
 			{/*Song*/}
