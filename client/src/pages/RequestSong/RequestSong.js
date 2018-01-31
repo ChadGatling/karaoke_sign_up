@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {Input, FormBtn/*, Select*/} from "../../components/Form";
-import { Redirect } from "react-router";
 import API from "../../utils/API";
 
 class RequestSong extends Component {
