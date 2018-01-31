@@ -6,6 +6,7 @@ import API from "../../utils/API";
 class RequestSong extends Component {
 	state = {
 		username: "",
+		firstName: "",
 		song: "",
 		artist: "",
 		comment: "",
@@ -18,7 +19,8 @@ class RequestSong extends Component {
 				console.log("res.data", res);
 				if (res.data) {
 					this.setState({
-						username: res.data.username
+						username: res.data.username,
+						firstName: res.data.firstName
 					});
 				}
 			});
@@ -35,7 +37,7 @@ class RequestSong extends Component {
 		event.preventDefault();
 
 		API.saveSinger({
-			name: this.state.username,
+			name: this.state.firstName,
 			song: this.state.song,
 			artist: this.state.artist,
 			location: "Ego's",
@@ -74,8 +76,6 @@ class RequestSong extends Component {
 				<FormBtn onClick={this.handleFormSubmit}>
 					Request Song
 				</FormBtn>
-			{/*redirect*/}
-				{this.state.submitted && <Redirect to="/singers" />}
 			</form>
 		</div>
 		)
