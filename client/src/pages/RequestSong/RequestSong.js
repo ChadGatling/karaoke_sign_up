@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import {Input, FormBtn/*, Select*/} from "../../components/Form";
+import Nav from "../../components/Nav";
 import API from "../../utils/API";
+
+var Style = {
+  // width: "100%",
+  // height: "700px",
+  // backgroundSize: "cover",
+  // backgroundPosition: "8%",
+  // backgroundImage: "url(https://d1yn1kh78jj1rr.cloudfront.net/image/preview/rDtN98Qoishumwih/karaoke-background_GJWDxYBO_SB_PM.jpg)"
+};
 
 class RequestSong extends Component {
 	state = {
@@ -15,12 +24,13 @@ class RequestSong extends Component {
 	componentDidMount() {
 		API.session()
 			.then(res => {
-				console.log("res.data", res);
+				// console.log("res.data", res);
 				if (res.data) {
 					this.setState({
 						username: res.data.username,
 						firstName: res.data.firstName
 					});
+					console.log("RequestSong username", this.state.username);
 				}
 			});
 	};
@@ -48,8 +58,9 @@ class RequestSong extends Component {
 
 	render() {
 		return(
-		<div>
-			<h1>Request Song -Hashed-</h1>
+		<div style={ Style }>
+			<Nav username={this.state.username}/>
+			<h1>Request Song</h1>
 			{this.state.username}
 			<form>
 			{/*Song*/}

@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import {Input, FormBtn/*, Select*/} from "../../components/Form";
+import Nav from "../../components/Nav";
 import API from "../../utils/API";
 // import { Redirect } from "react-router";
 
-
-const colorRed = {color: "red"};
+var Style = {
+  // width: "100%",
+  // height: "700px",
+  // backgroundSize: "cover",
+  // backgroundPosition: "8%",
+  // backgroundImage: "url(https://d1yn1kh78jj1rr.cloudfront.net/image/preview/rDtN98Qoishumwih/karaoke-background_GJWDxYBO_SB_PM.jpg)"
+};
 
 class SignUp extends Component {
 	state = {
@@ -61,29 +67,6 @@ class SignUp extends Component {
 			alert("Password retype must match password.");
 		}
 	};
- 
-	handleLogIn = (event) => {
-		event.preventDefault();
-		if (this.state.username && this.state.password) {
-				API.logIn({
-					username: this.state.username,
-					password: this.state.password
-				}).then(response => {
-					console.log("response", response);
-					if (response.data === "success") {
-						this.props.history.push("/requestSong")
-
-					}else if (response.data === "fail") {
-						alert("Username or password does not match.")
-					}else {
-						alert("oh boy something went wrong.")
-					}
-				}
-			)
-		}else {
-			alert("Both username and password required to sign in.")
-		}
-	}
 
 	componentDidMount() {
 
@@ -91,7 +74,8 @@ class SignUp extends Component {
  
 	render() {
 		return(
-			<div>
+			<div style={ Style }>
+				<Nav username={this.state.username} />
 				<h1>Sign Up</h1>
 				{/*<span>{this.state.username}</span>*/}
 				<form>
@@ -105,7 +89,7 @@ class SignUp extends Component {
 					/>
 				{/*first name*/}
 					<Input 
-					placeholder="First name (Sign up only)" 
+					placeholder="First name" 
 					onChange={this.handleInputChange}
 					name="firstName"
 					type="text"
@@ -113,7 +97,7 @@ class SignUp extends Component {
 					/>
 				{/*last name*/}
 					<Input 
-					placeholder="Last name (Sign up only)"
+					placeholder="Last name"
 					onChange={this.handleInputChange}
 					name="lastName"
 					type="text"
@@ -121,29 +105,23 @@ class SignUp extends Component {
 					/>
 				{/*nickname*/}
 					<Input 
-					placeholder="Nickname (Sign up only)"
+					placeholder="Nickname"
 					onChange={this.handleInputChange}
 					name="nickname"
 					type="text"
 					required
 					/>
 				{/*password*/}
-					<span style={colorRed}>
-						*DO NOT USE A REAL PASSWORD JUST MAKE UP SOMETHING STUPID*
-					</span>
 					<Input 
-					placeholder="Password (Insecure! do not use a real password)"
+					placeholder="Password"
 					onChange={this.handleInputChange}
 					name="password"
 					type="password"
 					required
 					/>
 				{/*password match*/}
-					<span style={colorRed}>
-						*AAAAAAHHHHH!!!! DO NOT USE A REAL PASSWORD, DAMN HOW MANY TIME DO I HAVE TO TELL YOU!?*
-					</span>
 					<Input 
-					placeholder="Retype password (Do people still do this?)"
+					placeholder="Retype password"
 					onChange={this.handleInputChange}
 					name="passwordMatch"
 					type="password"
@@ -159,9 +137,6 @@ class SignUp extends Component {
 					</Select>*/}
 					<FormBtn onClick={this.handleSignUp}>
 						Sign Up
-					</FormBtn>
-					<FormBtn onClick={this.handleLogIn}>
-						Sign In
 					</FormBtn>
 				</form>
 			</div>

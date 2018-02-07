@@ -1,20 +1,30 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 
+var Style = {
+	color: "white"
+    // backgroundImage: "url(https://d1yn1kh78jj1rr.cloudfront.net/image/preview/rDtN98Qoishumwih/karaoke-background_GJWDxYBO_SB_PM.jpg)"
+};
+
 class Nav extends Component {
 	state = {
+		username: this.props.username
+	};
 
+	componentDidMount() {
+		console.log("Nav username", this.state.username);
+		this.setState({username: this.props.username})
 	};
 
 	handleLogout = event => {
 		event.preventDefault();
 
-		API.logOut().then(this.props.history.push("/requestSong"));
-	}
+		API.logOut().then(this.props.history.push("/"));
+	};
 
 	render() {
 		return(
-			<div>
+			<div style={ Style }>
 				<nav className="navbar navbar-inverse navbar-top">
 					<div className="container-fluid">
 						<div className="navbar-header">
@@ -26,21 +36,26 @@ class Nav extends Component {
 							<a href="/singers" className="navbar-brand">
 								Singers
 							</a>
-							<a href="/requestSong" className="navbar-brand">
-								Request Song
-							</a>
+							{this.state.username &&
+								<a href="/requestSong" className="navbar-brand">
+									Request Song
+								</a>
+							}
 							<a href="/signUp" className="navbar-brand">
 								Sign Up
 							</a>
 							<a href="/songs" className="navbar-brand">
 								Song List
 							</a>
-							<a href="/locations" className="navbar-brand">
+							{/*<a href="/locations" className="navbar-brand">
 								Locations
-							</a>
-							<a className="navbar-brand" onClick={this.handleLogout}>
-								Log Out
-							</a>
+							</a>*/}
+							{this.state.username &&
+								<a className="navbar-brand" onClick={this.handleLogout}>
+									Log Out
+								</a>
+							}
+							<span>{this.state.username || "No username in state"}</span>
 						</div>
 					</div>
 				</nav>

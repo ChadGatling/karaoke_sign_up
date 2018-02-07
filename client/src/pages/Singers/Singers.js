@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { List, ListItem } from "../../components/List";
+import Nav from "../../components/Nav";
 
 class Singers extends Component {
 	state = {
@@ -22,6 +23,7 @@ class Singers extends Component {
 	render() {
 		return (
 			<div>
+				<Nav />
 				<h1>Singers</h1>
 				<div>
 					<List>
