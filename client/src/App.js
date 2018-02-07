@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Locations from "./pages/Locations";
-import Nav from "./components/Nav";
 import SignUp from "./pages/SignUp";
 import Singers from "./pages/Singers";
 import Songs from "./pages/Songs";
@@ -34,7 +33,6 @@ class App extends Component {
 							<Route exact path="/singers" component={Singers} />
 							<Route exact path="/songs" component={Songs} />
 							<Route exact path="/locations" component={Locations} />
-							<Route exact path="/Nav" component={Nav} />
 					</div>
 				</Router>
 			</div>

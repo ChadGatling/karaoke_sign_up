@@ -75,7 +75,7 @@ module.exports = {
         console.log("Session api hit", req.session);
         if (req.session) {
             db.User
-                .findById(req.session.userId)
+                .findById(req.session.userId, "-password")
                 .then(dbModel => res.json(dbModel)) // diable json for production
                 .catch(err => res.status(422).json(err));
         } else {
@@ -100,8 +100,10 @@ module.exports = {
 
                     bcrypt.compare(req.body.password, dbModel.password, function(err, hashRes) {
                         if (hashRes) {
-                            req.session.userId = dbModel._id
+                            req.session.userId = dbModel._id;
                             res.send("success");
+                        }else {
+                            res.send("fail")
                         }
                     });                    
                 }else {

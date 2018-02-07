@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {withRouter} from "react-router-dom";
 import API from "../../utils/API";
 
 var Style = {
@@ -8,12 +9,25 @@ var Style = {
 
 class Nav extends Component {
 	state = {
-		username: this.props.username
+		username: this.props.username,
+		firstName: "",
+		song: "",
+		artist: "",
+		comment: "",
+		location: ""
 	};
 
 	componentDidMount() {
-		console.log("Nav username", this.state.username);
-		this.setState({username: this.props.username})
+		console.log("Nav props", this.props);
+		// API.session()
+		// 	.then(res => {
+		// 		// console.log("res.data", res);
+		// 		if (res.data) {
+		// 			this.setState({
+		// 				username: res.data.username
+		// 			});
+		// 		}
+		// 	});
 	};
 
 	handleLogout = event => {
@@ -36,26 +50,33 @@ class Nav extends Component {
 							<a href="/singers" className="navbar-brand">
 								Singers
 							</a>
-							{this.state.username &&
+							{this.props.username &&
 								<a href="/requestSong" className="navbar-brand">
 									Request Song
 								</a>
 							}
-							<a href="/signUp" className="navbar-brand">
+							{!this.props.username &&
+								<a href="/signUp" className="navbar-brand">
 								Sign Up
-							</a>
-							<a href="/songs" className="navbar-brand">
+								</a>
+							}
+							{!this.props.username &&
+								<a href="/logIn" className="navbar-brand">
+								Log In
+								</a>
+							}
+							{/*<a href="/songs" className="navbar-brand">
 								Song List
-							</a>
+							</a>*/}
 							{/*<a href="/locations" className="navbar-brand">
 								Locations
 							</a>*/}
-							{this.state.username &&
-								<a className="navbar-brand" onClick={this.handleLogout}>
+							{this.props.username &&
+								<a href="" className="navbar-brand" onClick={this.handleLogout}>
 									Log Out
 								</a>
 							}
-							<span>{this.state.username || "No username in state"}</span>
+							<span>{this.props.username || "Please log in."}</span>
 						</div>
 					</div>
 				</nav>
@@ -64,4 +85,4 @@ class Nav extends Component {
 	}
 }
 
-export default Nav;
+export default withRouter(Nav);

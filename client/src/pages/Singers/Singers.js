@@ -5,7 +5,8 @@ import Nav from "../../components/Nav";
 
 class Singers extends Component {
 	state = {
-		singers: []
+		singers: [],
+		location: "Ego's"
 	};
 
 	componentDidMount() {
@@ -15,7 +16,7 @@ class Singers extends Component {
 	loadSingers = () => {
 		API.getSingers()
 			.then(res => {
-				this.setState({ singers: res.data})
+				this.setState({ singers: res.data })
 				})
 			.catch(err => console.log(err))
 	};
@@ -23,13 +24,14 @@ class Singers extends Component {
 	render() {
 		return (
 			<div>
-				<Nav />
-				<h1>Singers</h1>
+				<Nav props={this.props}/>
+				<h1>Singers at {this.state.location}</h1>
 				<div>
 					<List>
+						{!this.state.singers && <span>Loading Singers</span>}
 						{this.state.singers.map(singer => (
 							<ListItem key={singer._id}>
-								{singer.name} singing	{singer.song} by {singer.artist}
+								{singer.name} singing {singer.song} by {singer.artist}
 							</ListItem>
 						))}
 					</List>

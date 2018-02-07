@@ -22,8 +22,9 @@ class SignUp extends Component {
 		locations: [],
 		submitted: false
 	};
+	componentDidMount() {
 
-
+	};
 
 	handleInputChange = event => {
 		const { name, value } = event.target;
@@ -54,15 +55,11 @@ class SignUp extends Component {
 			alert("Both username and password required to sign in.")
 		}
 	}
-
-	componentDidMount() {
-
-	}
  
 	render() {
 		return(
 			<div style={ Style }>
-				<Nav username={this.state.username} />
+				<Nav props={this.props} />
 				<h1>Log In</h1>
 				{/*<span>{this.state.username}</span>*/}
 				<form>

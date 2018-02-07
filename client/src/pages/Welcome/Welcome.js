@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {/*Input,*/ FormBtn/*, Select*/} from "../../components/Form";
 import Nav from "../../components/Nav";
+import API from "../../utils/API";
 
 var Style = {
   // width: "100%",
@@ -12,14 +13,26 @@ var Style = {
 
 class Welcome extends Component {
 	state = {
+		username: ""
+	};
 
+	componentDidMount() {
+		API.session()
+			.then(res => {
+				// console.log("res.data", res);
+				if (res.data) {
+					this.setState({
+						username: res.data.username
+					});
+				}
+			});
 	};
 
 	handleSignUp = event => {
 		event.preventDefault();
 
 		this.props.history.push("/signup")
-	}
+	};
 
 	handleLogIn = event => {
 		event.preventDefault();
@@ -30,18 +43,20 @@ class Welcome extends Component {
 	render() {
 		return(
 			<div style={ Style }>
-				<Nav />
+				<Nav props={this.props} />
 				<h1>Welcome</h1>
 				<p>Ready to sing? Just sing up or sign in, request a song, and have a drink.</p>
 				<div>
-					<form>
-						<FormBtn onClick={this.handleSignUp}>
-							Register
-						</FormBtn>
-						<FormBtn onClick={this.handleLogIn}>
-							Log in
-						</FormBtn>						
-					</form>
+					{!this.state.username &&
+						<form>
+							<FormBtn onClick={this.handleSignUp}>
+								Register
+							</FormBtn>
+							<FormBtn onClick={this.handleLogIn}>
+								Log in
+							</FormBtn>						
+						</form>
+					}
 				</div>
 			</div>
 		);

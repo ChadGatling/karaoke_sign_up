@@ -24,13 +24,12 @@ class RequestSong extends Component {
 	componentDidMount() {
 		API.session()
 			.then(res => {
-				// console.log("res.data", res);
+				console.log("res.data", res);
 				if (res.data) {
 					this.setState({
 						username: res.data.username,
 						firstName: res.data.firstName
 					});
-					console.log("RequestSong username", this.state.username);
 				}
 			});
 	};

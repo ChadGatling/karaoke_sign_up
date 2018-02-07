@@ -23,8 +23,6 @@ class SignUp extends Component {
 		submitted: false
 	};
 
-
-
 	handleInputChange = event => {
 		const { name, value } = event.target;
 		this.setState({
@@ -75,7 +73,7 @@ class SignUp extends Component {
 	render() {
 		return(
 			<div style={ Style }>
-				<Nav username={this.state.username} />
+				<Nav props={this.props} />
 				<h1>Sign Up</h1>
 				{/*<span>{this.state.username}</span>*/}
 				<form>
