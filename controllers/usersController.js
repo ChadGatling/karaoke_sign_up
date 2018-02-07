@@ -72,7 +72,7 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     session: function(req, res) {
-        console.log("Session api hit", req.session);
+        console.log("Api hit", req.session);
         if (req.session) {
             db.User
                 .findById(req.session.userId, "-password")
@@ -92,10 +92,10 @@ module.exports = {
         }
     },
     logIn: function(req, res) {
-        console.log("logging in", req.body.password);
+        // console.log("logging in", req.body.password);
         db.User
             .findOne({username: req.body.username}).then(dbModel => {
-                console.log("dbModel =", dbModel);
+                // console.log("dbModel =", dbModel);
                 if (dbModel) {
 
                     bcrypt.compare(req.body.password, dbModel.password, function(err, hashRes) {

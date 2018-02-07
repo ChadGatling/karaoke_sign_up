@@ -59,7 +59,7 @@ class SignUp extends Component {
 	render() {
 		return(
 			<div style={ Style }>
-				<Nav props={this.props} />
+				<Nav />
 				<h1>Log In</h1>
 				{/*<span>{this.state.username}</span>*/}
 				<form>

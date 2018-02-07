@@ -43,7 +43,7 @@ class Welcome extends Component {
 	render() {
 		return(
 			<div style={ Style }>
-				<Nav props={this.props} />
+				<Nav username={this.state.username}/>
 				<h1>Welcome</h1>
 				<p>Ready to sing? Just sing up or sign in, request a song, and have a drink.</p>
 				<div>

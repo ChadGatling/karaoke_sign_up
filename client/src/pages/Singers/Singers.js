@@ -6,11 +6,21 @@ import Nav from "../../components/Nav";
 class Singers extends Component {
 	state = {
 		singers: [],
+		username: "",
 		location: "Ego's"
 	};
 
 	componentDidMount() {
-		this.loadSingers();
+		API.session()
+			.then(res => {
+				console.log("res.data", res);
+				if (res.data) {
+					this.setState({
+						username: res.data.username,
+						firstName: res.data.firstName
+					});
+				}
+			}).then(this.loadSingers());
 	}
 
 	loadSingers = () => {
@@ -24,7 +34,7 @@ class Singers extends Component {
 	render() {
 		return (
 			<div>
-				<Nav props={this.props}/>
+				<Nav username={this.state.username}/>
 				<h1>Singers at {this.state.location}</h1>
 				<div>
 					<List>

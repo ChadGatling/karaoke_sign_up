@@ -52,9 +52,11 @@ class SignUp extends Component {
 							password: this.state.password
 						})
 						.then(response => {
-							this.setState({userId: response})
+							console.log("saveUser response", response);
+							if (response.data === "done") {
+								this.props.history.push("/requestSong")
+							}
 						})
-						.then(this.props.history.push("/requestSong"))
 						.catch(err => console.log(err));
 					}
 				})
@@ -65,15 +67,11 @@ class SignUp extends Component {
 			alert("Password retype must match password.");
 		}
 	};
-
-	componentDidMount() {
-
-	}
  
 	render() {
 		return(
 			<div style={ Style }>
-				<Nav props={this.props} />
+				<Nav />
 				<h1>Sign Up</h1>
 				{/*<span>{this.state.username}</span>*/}
 				<form>

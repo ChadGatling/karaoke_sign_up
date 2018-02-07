@@ -18,22 +18,16 @@ class Nav extends Component {
 	};
 
 	componentDidMount() {
-		console.log("Nav props", this.props);
-		// API.session()
-		// 	.then(res => {
-		// 		// console.log("res.data", res);
-		// 		if (res.data) {
-		// 			this.setState({
-		// 				username: res.data.username
-		// 			});
-		// 		}
-		// 	});
+		// console.log("Nav props", this.props);
 	};
 
 	handleLogout = event => {
 		event.preventDefault();
 
-		API.logOut().then(this.props.history.push("/"));
+		API.logOut()
+			.then(
+				this.props.history.push("/")
+			);
 	};
 
 	render() {

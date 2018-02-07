@@ -24,7 +24,7 @@ class RequestSong extends Component {
 	componentDidMount() {
 		API.session()
 			.then(res => {
-				console.log("res.data", res);
+				// console.log("res.data", res);
 				if (res.data) {
 					this.setState({
 						username: res.data.username,
@@ -60,7 +60,6 @@ class RequestSong extends Component {
 		<div style={ Style }>
 			<Nav username={this.state.username}/>
 			<h1>Request Song</h1>
-			{this.state.username}
 			<form>
 			{/*Song*/}
 				<Input
