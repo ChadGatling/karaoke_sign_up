@@ -47,13 +47,17 @@ class Dashboard extends Component {
 	handleEditClick = event => {
 		event.preventDefault();
 
-		this.setState({edit: true})
+		this.setState(prevState => ({
+			edit: !prevState.edit
+		}))
 	};
 
 	handleDeleteClick = event => {
 		event.preventDefault();
 
-		this.setState({delete: true})
+		this.setState(prevState => ({
+			delete: !prevState.delete
+		}))
 	};
 
 	handleUpdateUser = event => {
@@ -63,13 +67,25 @@ class Dashboard extends Component {
 			firstName: this.state.firstNameEdit || this.state.firstName,
 			lastName: this.state.lastNameEdit || this.state.lastName,
 			nickname: this.state.nicknameEdit || this.state.nickname
-		})
+		}).then(
+			API.session()
+				.then(res => {
+					console.log("res.data", res);
+					if (res.data) {
+						this.setState({
+							...res.data
+						});
+					}else {
+						this.props.history.push("/")
+					}
+				}).then(this.setState({edit: false})));
 	};
 
 	handleDeleteUser = event => {
 		event.preventDefault();
 
-		API.deleteUser(this.state.username);
+		API.deleteUser(this.state.username)
+			.then(this.props.history.push("/"))
 	};
 
 	render() {
@@ -125,11 +141,11 @@ class Dashboard extends Component {
 							<FormBtn onClick={this.handleDeleteUser} className="btn btn-danger">Confirm Delete</FormBtn>
 						</div>
 					}
-					<hr/>
 					{this.state.access === "admin" &&
 						<form action="">
+							<hr/>
 							<FormBtn>
-								Add JK
+								Add KJ
 							</FormBtn>
 							<br/>
 							<FormBtn>

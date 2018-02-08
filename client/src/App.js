@@ -41,7 +41,7 @@ class App extends Component {
 				</Router>
 					<footer class="footer">
 						<div class="two-toned-footer-color"></div>
-						<p class="text-muted text-muted-footer text-center">
+						<p className="text-muted text-muted-footer text-center">
 							&copy; Copyright 2018 Elliott Wendel
 						</p>
 					</footer>
