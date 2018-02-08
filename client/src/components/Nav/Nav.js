@@ -18,7 +18,6 @@ class Nav extends Component {
 	};
 
 	componentDidMount() {
-		// console.log("Nav props", this.props);
 	};
 
 	handleLogout = event => {
@@ -80,7 +79,7 @@ class Nav extends Component {
 									Log Out
 								</a>
 							}
-							<span>{this.props.username || "Please log in."}</span>
+							<div>{this.props.username || "Please log in."}</div>
 						</div>
 					</div>
 				</nav>

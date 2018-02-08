@@ -14,12 +14,16 @@ export default {
         return axios.get("/api/users/" + id);
     },
     // Deletes the user with the given id
-    deleteUser: function(id) {
-        return axios.delete("/api/users/" + id);
+    deleteUser: function(userData) {
+        return axios.delete("/api/users", userData);
     },
     // Saves a user to the database
     saveUser: function(userData) {
         return axios.post("/api/users", userData);
+    },
+    // Update user in database
+    updateUser: function(userData) {
+        return axios.put("/api/users", userData);
     },
     // Saves a singer to the database
     saveSinger: function(singerData) {

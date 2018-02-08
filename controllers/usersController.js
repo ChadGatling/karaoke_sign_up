@@ -59,20 +59,22 @@ module.exports = {
 
     },
     update: function(req, res) {
+        console.log("updating", req.body, req.session.userId);
         db.User
-            .findOneAndUpdate({ _id: req.params.id }, req.body)
+            .findOneAndUpdate({ _id: req.session.userId }, req.body, "-password")
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     remove: function(req, res) {
+        console.log("removing", req.session.userId);
         db.User
-            .findById({ _id: req.params.id })
+            .findById({ _id: req.session.userId}, "-password")
             .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     session: function(req, res) {
-        console.log("Api hit", req.session);
+        // console.log("Api hit", req.session);
         if (req.session) {
             db.User
                 .findById(req.session.userId, "-password")

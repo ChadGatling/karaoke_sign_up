@@ -39,6 +39,12 @@ class App extends Component {
 							<Route exact path="/kj" component={Kj} />
 					</div>
 				</Router>
+					<footer class="footer">
+						<div class="two-toned-footer-color"></div>
+						<p class="text-muted text-muted-footer text-center">
+							&copy; Copyright 2018 Elliott Wendel
+						</p>
+					</footer>
 			</div>
 		);
 	}

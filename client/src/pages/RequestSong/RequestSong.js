@@ -30,6 +30,8 @@ class RequestSong extends Component {
 					this.setState({
 						...res.data
 					});
+				}else {
+					this.props.history.push("/")
 				}
 			});
 	};

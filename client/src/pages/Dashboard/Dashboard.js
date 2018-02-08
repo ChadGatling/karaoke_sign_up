@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { List, ListItem } from "../../components/List";
-import {/*Input,*/ FormBtn/*, Select*/} from "../../components/Form";
+import {Input, FormBtn/*, Select*/} from "../../components/Form";
 import Nav from "../../components/Nav";
 
 var margin = {
@@ -14,7 +14,13 @@ class Dashboard extends Component {
 		firstName: "",
 		lastName: "",
 		nickname: "",
-		access: ""
+		access: "",
+		edit: false,
+		firstNameEdit: "",
+		lastNameEdit: "",
+		nicknameEdit: "",
+		delete: false
+
 	};
 
 	componentDidMount() {
@@ -25,16 +31,45 @@ class Dashboard extends Component {
 					this.setState({
 						...res.data
 					});
+				}else {
+					this.props.history.push("/")
 				}
-			}).then(this.loadSingers());
+			});
 	}
 
-	loadSingers = () => {
-		API.getSingers()
-			.then(res => {
-				this.setState({ singers: res.data })
-				})
-			.catch(err => console.log(err))
+	handleInputChange = event => {
+		const { name, value } = event.target;
+		this.setState({
+			[name]: value
+		})
+	};
+
+	handleEditClick = event => {
+		event.preventDefault();
+
+		this.setState({edit: true})
+	};
+
+	handleDeleteClick = event => {
+		event.preventDefault();
+
+		this.setState({delete: true})
+	};
+
+	handleUpdateUser = event => {
+		event.preventDefault();
+
+		API.updateUser({
+			firstName: this.state.firstNameEdit || this.state.firstName,
+			lastName: this.state.lastNameEdit || this.state.lastName,
+			nickname: this.state.nicknameEdit || this.state.nickname
+		})
+	};
+
+	handleDeleteUser = event => {
+		event.preventDefault();
+
+		API.deleteUser(this.state.username);
 	};
 
 	render() {
@@ -52,6 +87,44 @@ class Dashboard extends Component {
 					<div>
 						Access level: {this.state.access}
 					</div>
+					<br/>
+					<FormBtn onClick={this.handleEditClick}>Edit Info</FormBtn>
+					{this.state.edit &&
+						<div>
+							<hr/>
+							<p>Please fill in the info you want to change and submit. Anything left blank will be unchanged.</p>
+							<form action="">
+								<Input 
+								placeholder="First name" 
+								onChange={this.handleInputChange}
+								name="firstNameEdit"
+								type="text"
+								/>
+								<Input 
+								placeholder="Last name" 
+								onChange={this.handleInputChange}
+								name="lastNameEdit"
+								type="text"
+								/>
+								<Input 
+								placeholder="Nickname" 
+								onChange={this.handleInputChange}
+								name="nicknameEdit"
+								type="text"
+								/>
+								<FormBtn onClick={this.handleUpdateUser}>Save Changes</FormBtn>
+							</form>
+						</div>
+					}
+					<hr/>
+					<FormBtn onClick={this.handleDeleteClick}>Delete Account</FormBtn>
+					{this.state.delete &&
+						<div>
+							<hr/>
+							<p>Are you sure you want to delete you account? This will wipe your user info from the database.</p>
+							<FormBtn onClick={this.handleDeleteUser} className="btn btn-danger">Confirm Delete</FormBtn>
+						</div>
+					}
 					<hr/>
 					{this.state.access === "admin" &&
 						<form action="">
