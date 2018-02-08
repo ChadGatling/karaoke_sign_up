@@ -18,7 +18,8 @@ class RequestSong extends Component {
 		song: "",
 		artist: "",
 		comment: "",
-		location: ""
+		location: "",
+		access: ""
 	};
 
 	componentDidMount() {
@@ -27,8 +28,7 @@ class RequestSong extends Component {
 				// console.log("res.data", res);
 				if (res.data) {
 					this.setState({
-						username: res.data.username,
-						firstName: res.data.firstName
+						...res.data
 					});
 				}
 			});
@@ -58,7 +58,7 @@ class RequestSong extends Component {
 	render() {
 		return(
 		<div style={ Style }>
-			<Nav username={this.state.username}/>
+			<Nav {...this.state}/>
 			<h1>Request Song</h1>
 			<form>
 			{/*Song*/}
@@ -85,6 +85,7 @@ class RequestSong extends Component {
 					Request Song
 				</FormBtn>
 			</form>
+			<hr/>
 		</div>
 		)
 	}

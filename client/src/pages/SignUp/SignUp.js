@@ -49,7 +49,8 @@ class SignUp extends Component {
 							firstName: this.state.firstName,
 							lastName: this.state.lastName,
 							nickname: this.state.nickname,
-							password: this.state.password
+							password: this.state.password,
+							access: "singer"
 						})
 						.then(response => {
 							console.log("saveUser response", response);
@@ -135,6 +136,7 @@ class SignUp extends Component {
 						Sign Up
 					</FormBtn>
 				</form>
+				<hr/>
 			</div>
 		);
 	}

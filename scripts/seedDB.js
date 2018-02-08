@@ -57,42 +57,56 @@ const userSeed = [
 		firstName: "Elliott",
 		lastName: "Wendel",
 		nickname: "",
-		password: "rachi"
+		password: "$2a$10$1gWB/XYL9uqBCvjH7KbJrObpsUzMi9abTpqRMPLxJ9wBNpbryUwpK",
+		access: "admin"
 	},
 	{
 		username: "cattschida",
 		firstName: "Cat",
 		lastName: "Tschida",
 		nickname: "",
-		password: "1111"
+		password: "$2a$10$XtfnLDsDRZ58c9rOO.ODHe69Z6hUfwSscXTk7atueNNA/dy0j5ZI6",
+		access: "singer"
 	},
 	{
 		username: "rachik",
 		firstName: "Rachel",
 		lastName: "K",
 		nickname: "Khaleesi",
-		password: "zela"
+		password: "$2a$10$Rv5U8U5QOqTVTX7GCrPMCuo7vYvuLFZWY.PPtgEKA7MeFQ79VBXoW",
+		access: "singer"
+	},
+	{
+		username: "anthonyM",
+		firstName: "Anthony",
+		lastName: "Moody",
+		nickname: "",
+		password: "$2a$10$ICO4R6bchfH6wSjH/mETeOTHQ63mZpkebqg4SD95R4qkbsAGVzB3.",
+		access: "kj"
 	},
 	{
 		username: "marceemarc",
 		firstName: "Marc",
 		lastName: "Ramirez",
 		nickname: "Cheese Enchilada",
-		password: "plumber"
+		password: "$2a$10$FaxzTL8GTuQeP3aOW6W1IOBUtSwgix0LP2RFK/RV5iHJGYIb4Bf6q",
+		access: "singer"
 	},
 	{
 		username: "abrakadabra",
 		firstName: "Kurt",
 		lastName: "Neopaofjafpkn",
 		nickname: "The Magician",
-		password: "password"
+		password: "$2a$10$zJvgIGlu40mo5wkelz9DCenZ1JTZ0709NDa8wkeBygNpUnbPpG6rq",
+		access: "singer"
 	},
 	{
 		username: "skiddleedee",
 		firstName: "Dan",
 		lastName: "Kojdho",
 		nickname: "DK",
-		password: "drummer"
+		password: "$2a$10$3SKelUQKILNCmOyweAWp7Oqoej6tX1zycwI2T7UHrXJEa36aTZ3Ri",
+		access: "singer"
 	}
 ];
 

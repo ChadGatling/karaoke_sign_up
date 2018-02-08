@@ -7,6 +7,8 @@ import Songs from "./pages/Songs";
 import Welcome from "./pages/Welcome";
 import RequestSong from "./pages/RequestSong";
 import LogIn from "./pages/LogIn";
+import Dashboard from "./pages/Dashboard";
+import Kj from "./pages/Kj";
 import './App.css';
 
 /*var Style = {
@@ -33,6 +35,8 @@ class App extends Component {
 							<Route exact path="/singers" component={Singers} />
 							<Route exact path="/songs" component={Songs} />
 							<Route exact path="/locations" component={Locations} />
+							<Route exact path="/dashboard" component={Dashboard} />
+							<Route exact path="/kj" component={Kj} />
 					</div>
 				</Router>
 			</div>

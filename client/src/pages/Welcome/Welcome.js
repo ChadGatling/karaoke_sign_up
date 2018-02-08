@@ -22,7 +22,8 @@ var center = {
 
 class Welcome extends Component {
 	state = {
-		username: ""
+		username: "",
+		access: ""
 	};
 
 	componentDidMount() {
@@ -31,7 +32,7 @@ class Welcome extends Component {
 				// console.log("res.data", res);
 				if (res.data) {
 					this.setState({
-						username: res.data.username
+						...res.data
 					});
 				}
 			});
@@ -67,7 +68,7 @@ class Welcome extends Component {
 						</form>
 					}
 				</div>
-				<br/>
+				<hr/>
 				<div style={margin}>
 					<p>
 						Karaoke-Sign-Up is intended to be an app for users to sign up to karaoke events from their table. At this point functionality exists for users to register, log in, request a song, and log out; as well as navigating pages and viewing the current list of singers.
@@ -76,6 +77,7 @@ class Welcome extends Component {
 						My intention is to allow users to pick from a list of available locations and confirm with gps data. There will be a separate area for use by the DJ himself were he can see the order of signups and confirm that a song is available. I am also interested in getting the location's songs so as to automatically confirm a song's availability. I would like to be able to determine if a user has left the location and automatically remove that user from the upcoming singers list.
 					</p>
 				</div>
+				<hr/>
 			</div>
 		);
 	}

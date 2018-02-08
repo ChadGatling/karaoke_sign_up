@@ -3,7 +3,7 @@ import API from "../../utils/API";
 import { List, ListItem } from "../../components/List";
 import Nav from "../../components/Nav";
 
-class Singers extends Component {
+class Kj extends Component {
 	state = {
 		singers: [],
 		username: "",
@@ -17,7 +17,9 @@ class Singers extends Component {
 				console.log("res.data", res);
 				if (res.data) {
 					this.setState({
-						...res.data
+						username: res.data.username,
+						firstName: res.data.firstName,
+						access: res.data.access
 					});
 				}
 			}).then(this.loadSingers());
@@ -35,20 +37,12 @@ class Singers extends Component {
 		return (
 			<div>
 				<Nav {...this.state}/>
-				<h1>Singers at {this.state.location}</h1>
+				<h1>Welcome KJ {this.state.username}</h1>
 				<div>
-					<List>
-						{!this.state.singers && <span>Loading Singers</span>}
-						{this.state.singers.map(singer => (
-							<ListItem key={singer._id}>
-								{singer.name} singing {singer.song} by {singer.artist}
-							</ListItem>
-						))}
-					</List>
 				</div>
 			</div>
 		);
 	}
 }
 
-export default Singers;
+export default Kj;

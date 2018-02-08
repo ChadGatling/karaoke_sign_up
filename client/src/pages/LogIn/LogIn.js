@@ -91,6 +91,7 @@ class SignUp extends Component {
 						Sign In
 					</FormBtn>
 				</form>
+				<hr/>
 			</div>
 		);
 	}

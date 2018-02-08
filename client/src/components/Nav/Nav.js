@@ -9,7 +9,7 @@ var Style = {
 
 class Nav extends Component {
 	state = {
-		username: this.props.username,
+		username: "",
 		firstName: "",
 		song: "",
 		artist: "",
@@ -47,6 +47,16 @@ class Nav extends Component {
 							{this.props.username &&
 								<a href="/requestSong" className="navbar-brand">
 									Request Song
+								</a>
+							}
+							{this.props.username &&
+								<a href="/dashboard" className="navbar-brand">
+									Dashboard
+								</a>
+							}
+							{this.props.access === "admin" || this.props.access === "kj" &&
+								<a href="/kj" className="navbar-brand">
+									KJ
 								</a>
 							}
 							{!this.props.username &&
