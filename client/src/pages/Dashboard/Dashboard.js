@@ -138,6 +138,7 @@ class Dashboard extends Component {
 						</form>
 					}
 				</div>
+				<hr/>
 			</div>
 		);
 	}
