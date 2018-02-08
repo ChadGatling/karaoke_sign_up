@@ -14,7 +14,7 @@ class Nav extends Component {
 		song: "",
 		artist: "",
 		comment: "",
-		location: ""
+		location: "",
 	};
 
 	componentDidMount() {
@@ -53,7 +53,12 @@ class Nav extends Component {
 									Dashboard
 								</a>
 							}
-							{this.props.access === "admin" || this.props.access === "kj" &&
+							{this.props.access === "admin" &&
+								<a href="/kj" className="navbar-brand">
+									KJ
+								</a>
+							}
+							{this.props.access === "kj" &&
 								<a href="/kj" className="navbar-brand">
 									KJ
 								</a>
