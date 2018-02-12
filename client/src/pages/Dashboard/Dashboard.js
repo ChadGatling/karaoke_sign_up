@@ -137,7 +137,7 @@ class Dashboard extends Component {
 					{this.state.delete &&
 						<div>
 							<hr/>
-							<p>Are you sure you want to delete you account? This will wipe your user info from the database.</p>
+							<p>Are you sure you want to delete your account? This will wipe your user info from the database.</p>
 							<FormBtn onClick={this.handleDeleteUser} className="btn btn-danger">Confirm Delete</FormBtn>
 						</div>
 					}
