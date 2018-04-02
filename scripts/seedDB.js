@@ -112,10 +112,14 @@ const userSeed = [
 
 const locationSeed = [
 	{
-		name: "Ego's"
+		name: "Ego's",
+		lat: 30.256506,
+		lng: -97.747693
 	},
 	{
-		name: "Baker St. Pub"
+		name: "Baker St. Pub",
+		lat: 30.242827,
+		lng: -97.783244
 	}
 ];
 
@@ -141,13 +145,13 @@ db.User
 		process.exit(1);
 	});
 
-// db.Singer
-// 	.remove({})
-// 	.then(() => db.Singer.collection.insertMany(singerSeed))
-// 	.then(data => {
-// 		process.exit(0);
-// 	})
-// 	.catch(err => {
-// 		console.log(err);
-// 		process.exit(1);
-// 	})
+db.Singer
+	.remove({})
+	.then(() => db.Singer.collection.insertMany(singerSeed))
+	.then(data => {
+		process.exit(0);
+	})
+	.catch(err => {
+		console.log(err);
+		process.exit(1);
+	})

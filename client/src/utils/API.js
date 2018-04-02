@@ -37,5 +37,8 @@ export default {
     },
     logIn: function(userData) {
         return axios.post("/api/logIn", userData)
+    },
+    location: function(id) {
+        return axios.post("/api/location/" + id)
     }
 };
