@@ -101,7 +101,6 @@ class RequestSong extends Component {
 					Request Song
 				</FormBtn>
 			</form>
-			<div>{this.state.locations}</div>
 			<hr/>
 		</div>
 		)
