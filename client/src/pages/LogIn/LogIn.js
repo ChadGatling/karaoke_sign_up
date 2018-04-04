@@ -64,7 +64,7 @@ class SignUp extends Component {
 				{/*<span>{this.state.username}</span>*/}
 				<form>
 				{/*Username*/}
-					<Input 
+					<Input autoFocus
 					placeholder="Username" 
 					onChange={this.handleInputChange}
 					name="username"

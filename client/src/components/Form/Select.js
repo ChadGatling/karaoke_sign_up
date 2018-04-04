@@ -5,8 +5,8 @@ export const Select = props =>
   <div className="form-group">
     <select className="form-control" required {...props} >
     	<option value="" disabled selected hidden >Location</option>
-    	{props.children.map(choice =>
-    		<option>{choice}</option>	
+    	{props.locations.map((choice, i) =>
+    		<option key={i}>{choice}</option>	
 		)}
     </select>
   </div>;

@@ -13,6 +13,6 @@ router.use("/singers", singerRoutes);
 router.use("/session", sessionRoutes);
 router.use("/logOut", logOutRoutes);
 router.use("/logIn", logInRoutes);
-router.use("/location", locationRoutes);
+router.use("/locations", locationRoutes);
 
 module.exports = router;

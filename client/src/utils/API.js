@@ -40,5 +40,8 @@ export default {
     },
     location: function(id) {
         return axios.post("/api/location/" + id)
+    },
+    listLocations: function() {
+        return axios.get("/api/locations")
     }
 };

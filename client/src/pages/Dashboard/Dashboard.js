@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { List, ListItem } from "../../components/List";
+// import { List, ListItem } from "../../components/List";
 import {Input, FormBtn/*, Select*/} from "../../components/Form";
 import Nav from "../../components/Nav";
 

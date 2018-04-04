@@ -18,11 +18,12 @@ class RequestSong extends Component {
 		song: "",
 		artist: "",
 		comment: "",
-		location: "",
+		locations: [],
 		access: ""
 	};
 
 	componentDidMount() {
+		// Get user info from session on server then get the locations from the database and set them in state.
 		API.session()
 			.then(res => {
 				// console.log("res.data", res);
@@ -33,7 +34,15 @@ class RequestSong extends Component {
 				}else {
 					this.props.history.push("/")
 				}
-			});
+			}).then(API.listLocations().then(res => {
+			
+				this.setState({
+					locations: res.data.map(location => {
+					return location.name
+					})
+				})
+			})
+		)
 	};
 
 	handleInputChange = event => {
@@ -67,7 +76,7 @@ class RequestSong extends Component {
 				<Select
 				onChange={this.handleInputChange}
 				name="location"
-				children= {["Egos's", "Baker St. Pub"]}
+				locations= {this.state.locations}
 				/>
 			{/*Song*/}
 				<Input
@@ -92,6 +101,7 @@ class RequestSong extends Component {
 					Request Song
 				</FormBtn>
 			</form>
+			<div>{this.state.locations}</div>
 			<hr/>
 		</div>
 		)
