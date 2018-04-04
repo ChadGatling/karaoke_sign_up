@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Input, FormBtn/*, Select*/} from "../../components/Form";
+import {Input, FormBtn, Select} from "../../components/Form";
 import Nav from "../../components/Nav";
 import API from "../../utils/API";
 
@@ -63,6 +63,12 @@ class RequestSong extends Component {
 			<Nav {...this.state}/>
 			<h1>Request Song</h1>
 			<form>
+			{/*location*/}
+				<Select
+				onChange={this.handleInputChange}
+				name="location"
+				children= {["Egos's", "Baker St. Pub"]}
+				/>
 			{/*Song*/}
 				<Input
 				placeholder="Song"
@@ -81,7 +87,6 @@ class RequestSong extends Component {
 				onChange={this.handleInputChange}
 				name="comment"
 				/>
-			{/*location*/}
 			{/*submit*/}
 				<FormBtn onClick={this.handleFormSubmit}>
 					Request Song
