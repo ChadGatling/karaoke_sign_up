@@ -35,12 +35,11 @@ class RequestSong extends Component {
 					this.props.history.push("/")
 				}
 			}).then(API.listLocations().then(res => {
-			
+			console.log("Locations", res);			
 				this.setState({
-					locations: res.data.map(location => {
-					return location.name
-					})
+					locations: res.data
 				})
+				console.log("State", this.state);
 			})
 		)
 	};
@@ -71,24 +70,28 @@ class RequestSong extends Component {
 		<div style={ Style }>
 			<Nav {...this.state}/>
 			<h1>Request Song</h1>
-			<form>
+			<form onSubmit={this.handleFormSubmit}>
 			{/*location*/}
 				<Select
+				autoFocus
 				onChange={this.handleInputChange}
 				name="location"
-				locations= {this.state.locations}
+				locations= {this.state.locations.map(location => {return location.name})}
+				required
 				/>
 			{/*Song*/}
 				<Input
 				placeholder="Song"
 				onChange={this.handleInputChange}
 				name="song"
+				required
 				/>
 			{/*Artist*/}
 				<Input
 				placeholder="Artist"
 				onChange={this.handleInputChange}
 				name="artist"
+				required
 				/>
 			{/*comment*/}
 				<Input
@@ -97,7 +100,7 @@ class RequestSong extends Component {
 				name="comment"
 				/>
 			{/*submit*/}
-				<FormBtn onClick={this.handleFormSubmit}>
+				<FormBtn type="submit">
 					Request Song
 				</FormBtn>
 			</form>

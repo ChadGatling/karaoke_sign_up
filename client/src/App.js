@@ -17,6 +17,10 @@ import './App.css';
   backgroundImage: "url(https://randolphsbilliards.com/wp-content/uploads/2016/05/Facebook-Event-Background.png)"
 };*/
 
+const windowHeight = {
+	height: "100vh"
+};
+
 class App extends Component {
 	state = {
 		username: ""
@@ -24,7 +28,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<div>
+			<div style={windowHeight}>
 				<Router>
 					<div>
 						<Switch /> 

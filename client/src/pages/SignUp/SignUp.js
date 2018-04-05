@@ -75,7 +75,7 @@ class SignUp extends Component {
 				<Nav />
 				<h1>Sign Up</h1>
 				{/*<span>{this.state.username}</span>*/}
-				<form>
+				<form onSubmit={this.handleSignUp}>
 				{/*Username*/}
 					<Input autoFocus
 					placeholder="Username" 
@@ -106,7 +106,6 @@ class SignUp extends Component {
 					onChange={this.handleInputChange}
 					name="nickname"
 					type="text"
-					required
 					/>
 				{/*password*/}
 					<Input 
@@ -132,7 +131,7 @@ class SignUp extends Component {
 					required
 					>						
 					</Select>*/}
-					<FormBtn onClick={this.handleSignUp}>
+					<FormBtn type="submit">
 						Sign Up
 					</FormBtn>
 				</form>

@@ -113,37 +113,42 @@ const userSeed = [
 const locationSeed = [
 	{
 		name: "Ego's",
-		lat: 30.256506,
-		lng: -97.747693
+		lat: 30.256314,
+		lng: -97.783180
 	},
 	{
 		name: "Baker St. Pub",
-		lat: 30.242827,
+		lat: 30.242496,
 		lng: -97.783244
+	},
+	{
+		name: "The Brass Tap",
+		lat: 30.395958,
+		lng: -97.726967
 	}
 ];
 
-db.Location
-	.remove({})
-	.then(() => db.Location.collection.insertMany(locationSeed))
-	.then(data => {
-		process.exit(0);
-	})
-	.catch(err => {
-		console.log(err);
-		process.exit(1);
-	});
+// db.Location
+// 	.remove({})
+// 	.then(() => db.Location.collection.insertMany(locationSeed))
+// 	.then(data => {
+// 		process.exit(0);
+// 	})
+// 	.catch(err => {
+// 		console.log(err);
+// 		process.exit(1);
+// 	});
 
-db.User
-	.remove({})
-	.then(() => db.User.collection.insertMany(userSeed))
-	.then(data => {
-		process.exit(0);
-	})
-	.catch(err => {
-		console.log(err);
-		process.exit(1);
-	});
+// db.User
+// 	.remove({})
+// 	.then(() => db.User.collection.insertMany(userSeed))
+// 	.then(data => {
+// 		process.exit(0);
+// 	})
+// 	.catch(err => {
+// 		console.log(err);
+// 		process.exit(1);
+// 	});
 
 db.Singer
 	.remove({})
@@ -155,3 +160,4 @@ db.Singer
 		console.log(err);
 		process.exit(1);
 	})
+
