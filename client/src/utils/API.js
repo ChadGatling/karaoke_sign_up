@@ -38,8 +38,8 @@ export default {
     logIn: function(userData) {
         return axios.post("/api/logIn", userData)
     },
-    location: function(id) {
-        return axios.post("/api/location/" + id)
+    checkLocation: function(id) {
+        return axios.get("/api/location/" + id)
     },
     listLocations: function() {
         return axios.get("/api/locations")

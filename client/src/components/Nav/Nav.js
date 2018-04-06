@@ -14,7 +14,8 @@ class Nav extends Component {
 		song: "",
 		artist: "",
 		comment: "",
-		location: "",
+		lat: null,
+		lng: null
 	};
 
 	componentDidMount() {

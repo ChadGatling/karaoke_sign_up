@@ -6,7 +6,7 @@ export const Select = props =>
     <select className="form-control" {...props} >
     	<option value="" disabled selected hidden >Location</option>
     	{props.locations.map((choice, i) =>
-    		<option key={i}>{choice}</option>	
+    		<option key={i} value={i + 1}>{choice}</option>	
 		)}
     </select>
   </div>;

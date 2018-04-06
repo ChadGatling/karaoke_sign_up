@@ -27,6 +27,8 @@ class Welcome extends Component {
 	};
 
 	componentDidMount() {
+		// this.getLocation();
+
 		API.session()
 			.then(res => {
 				// console.log("res.data", res);
@@ -48,7 +50,27 @@ class Welcome extends Component {
 		event.preventDefault();
 
 		this.props.history.push("/login")
-	}
+	};
+
+	// Function for getting the users location.
+    getLocation = () => {
+        if (navigator.geolocation) {
+            console.log("Getting location");
+            navigator.geolocation.getCurrentPosition(this.showPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    };
+
+    // Function given to the getCurrentPosition function for what to do with the position info
+    showPosition = (position) => {
+        console.log("Setting state");
+        this.setState({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        });
+        console.log(this.state)
+    };
 			
 	render() {
 		return(

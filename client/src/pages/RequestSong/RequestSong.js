@@ -11,6 +11,25 @@ var Style = {
   // backgroundImage: "url(https://d1yn1kh78jj1rr.cloudfront.net/image/preview/rDtN98Qoishumwih/karaoke-background_GJWDxYBO_SB_PM.jpg)"
 };
 
+function degreesToRadians(degrees) {
+  return degrees * Math.PI / 180;
+}
+
+function distanceInKmBetweenEarthCoordinates(lat1, lng1, lat2, lng2) {
+  var earthRadiusKm = 6371;
+
+  var dLat = degreesToRadians(lat2-lat1);
+  var dLng = degreesToRadians(lng2-lng1);
+
+  lat1 = degreesToRadians(lat1);
+  lat2 = degreesToRadians(lat2);
+
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.sin(dLng/2) * Math.sin(dLng/2) * Math.cos(lat1) * Math.cos(lat2); 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  return earthRadiusKm * c;
+}
+
 class RequestSong extends Component {
 	state = {
 		username: "",
@@ -19,6 +38,7 @@ class RequestSong extends Component {
 		artist: "",
 		comment: "",
 		locations: [],
+		locationIndex: "",
 		access: ""
 	};
 
@@ -46,24 +66,76 @@ class RequestSong extends Component {
 
 	handleInputChange = event => {
 		const { name, value } = event.target;
+		console.log("Input", name, value);
 		this.setState({
 			[name]: value
+		})
+
+		if (navigator.geolocation) {
+            console.log("Getting location");
+            navigator.geolocation.getCurrentPosition(this.checkPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+	};
+
+	handleLocationChange = event => {
+		const { name, value } = event.target;
+		console.log("Input", name, value);
+		this.setState({
+			[name]: value
+		},() => {
+			console.log("locationIndex", this.state.locationIndex);
+
+			this.getLocation()
 		})
 	};
 
 	handleFormSubmit = event => {
 		event.preventDefault();
-
-		API.saveSinger({
-			name: this.state.firstName,
-			song: this.state.song,
-			artist: this.state.artist,
-			location: "Ego's",
-			comment: this.state.comment,
-		})
-		.then(this.props.history.push("/singers"))
-		.catch(err => console.log(err));
+ 
 	};
+
+	// Function for getting the users location.
+    getLocation = () => {
+        if (navigator.geolocation) {
+            console.log("Getting location");
+            navigator.geolocation.getCurrentPosition(this.checkPosition); // Browser function to get locaion info then insert into the callback
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    };
+
+    // Function given to the getCurrentPosition function for what to do with the position info
+    checkPosition = (position) => {
+
+		
+		// value of the selected location and the index of the location array
+		const index = this.state.locationIndex
+    	console.log("Index", index);
+    	const lat1 = this.state.locations[index].lat;
+    	const lat2 = position.coords.latitude;
+    	const lng1 = this.state.locations[index].lng;
+    	const lng2 = position.coords.longitude;
+
+    	console.log("Distance", distanceInKmBetweenEarthCoordinates(lat1, lng1, lat2, lng2));
+        
+		// check whether the singer is at the location selected.
+		if (distanceInKmBetweenEarthCoordinates(lat1, lng1, lat2, lng2) <= .250) {
+
+			// save the singer and song to the database and list of singers
+			API.saveSinger({
+				name: this.state.firstName,
+				song: this.state.song,
+				artist: this.state.artist,
+				comment: this.state.comment
+			})
+				.then(this.props.history.push("/singers"))
+				.catch(err => console.log(err));
+		} else {
+			alert("Please make sure you are at the location you are signing up for.")
+		}
+    };
 
 	render() {
 		return(
@@ -74,8 +146,8 @@ class RequestSong extends Component {
 			{/*location*/}
 				<Select
 				autoFocus
-				onChange={this.handleInputChange}
-				name="location"
+				onChange={this.handleLocationChange}
+				name="locationIndex"
 				locations= {this.state.locations.map(location => {return location.name})}
 				required
 				/>
